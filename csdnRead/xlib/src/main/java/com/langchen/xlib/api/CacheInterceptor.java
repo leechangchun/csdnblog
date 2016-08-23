@@ -1,4 +1,4 @@
-package com.langchen.xlib.api.util;
+package com.langchen.xlib.api;
 
 import com.langchen.xlib.base.AppUtil;
 import com.langchen.xlib.base.BaseApp;

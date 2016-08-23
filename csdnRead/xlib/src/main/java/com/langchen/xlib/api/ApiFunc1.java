@@ -1,9 +1,10 @@
-package com.langchen.xlib.api.util;
+package com.langchen.xlib.api;
 
 import android.util.Log;
 
 
-import com.langchen.xlib.api.resp.BaseResp;
+import com.langchen.xlib.api.ApiExecption;
+import com.langchen.xlib.api.BaseResp;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -20,7 +21,6 @@ public class ApiFunc1<T extends BaseResp> implements Func1<T, Observable<T>> {
          return Observable.create(new Observable.OnSubscribe<T>() {
              @Override
              public void call(Subscriber<? super T> subscriber) {
-                 Log.e("xx",t.toString());
                  if (t.getError_code()!=null) {
                      subscriber.onError(new ApiExecption(t.getRequest(),t.getError_code(),t.getError()));
                  } else {

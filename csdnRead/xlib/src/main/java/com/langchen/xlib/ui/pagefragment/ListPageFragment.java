@@ -21,10 +21,10 @@ import in.srain.cube.views.ptr.PtrHandler;
 
 /**
  * Created by admin on 2016/8/23.
- * 显示列表的fragment
+ * 显示列表的fragment 用listview
  * 包含  分页 上拉加载  下拉刷新
  */
-public class PageFragment extends Fragment implements IPageView{
+public class ListPageFragment extends Fragment implements IPageView{
     //数据加载器
     private IPagePresenter pagePresenter;
     //通用adaper
@@ -36,7 +36,7 @@ public class PageFragment extends Fragment implements IPageView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_page, container, false);
+        View rootView = inflater.inflate(R.layout.list_fragment_page, container, false);
         listView = (ListView) rootView.findViewById(R.id.listView);
         mPtrFrame = (PtrClassicFrameLayout) rootView.findViewById(R.id.rotate_header_list_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);

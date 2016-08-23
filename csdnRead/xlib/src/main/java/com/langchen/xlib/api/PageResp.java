@@ -1,4 +1,6 @@
-package com.langchen.xlib.api.resp;
+package com.langchen.xlib.api;
+
+import com.langchen.xlib.api.BaseResp;
 
 import java.util.ArrayList;
 

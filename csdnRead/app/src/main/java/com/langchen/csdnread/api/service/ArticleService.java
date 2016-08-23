@@ -1,7 +1,7 @@
 package com.langchen.csdnread.api.service;
 
 import com.langchen.csdnread.entity.Article;
-import com.langchen.xlib.api.resp.PageResp;
+import com.langchen.xlib.api.PageResp;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

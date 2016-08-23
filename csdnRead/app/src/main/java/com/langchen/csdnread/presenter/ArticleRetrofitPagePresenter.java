@@ -2,8 +2,8 @@ package com.langchen.csdnread.presenter;
 
 import com.langchen.csdnread.api.service.ArticleService;
 import com.langchen.csdnread.entity.Article;
-import com.langchen.xlib.api.resp.PageResp;
-import com.langchen.xlib.api.util.ApiUtils;
+import com.langchen.xlib.api.PageResp;
+import com.langchen.xlib.api.ApiUtils;
 import com.langchen.xlib.ui.pagefragment.RetrofitPagePresenter;
 import com.langchen.xlib.ui.pagefragment.IPageView;
 

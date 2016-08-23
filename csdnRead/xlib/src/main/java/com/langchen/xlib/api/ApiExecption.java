@@ -1,4 +1,4 @@
-package com.langchen.xlib.api.util;
+package com.langchen.xlib.api;
 
 /**
  * Created by admin on 2016/8/18.

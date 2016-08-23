@@ -1,8 +1,8 @@
 package com.langchen.xlib.ui.pagefragment;
 
-import com.langchen.xlib.api.resp.PageResp;
-import com.langchen.xlib.api.util.ApiFunc1;
-import com.langchen.xlib.api.util.ApiObserver;
+import com.langchen.xlib.api.PageResp;
+import com.langchen.xlib.api.ApiFunc1;
+import com.langchen.xlib.api.ApiObserver;
 
 import rx.Observable;
 import rx.Subscriber;

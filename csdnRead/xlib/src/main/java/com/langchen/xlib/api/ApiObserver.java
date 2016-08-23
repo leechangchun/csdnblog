@@ -1,6 +1,8 @@
-package com.langchen.xlib.api.util;
+package com.langchen.xlib.api;
 
 import android.util.Log;
+
+import com.langchen.xlib.api.ApiExecption;
 
 import rx.Observer;
 

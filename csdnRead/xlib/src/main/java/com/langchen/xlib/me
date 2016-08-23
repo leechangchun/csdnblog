@@ -5,3 +5,9 @@
 5.自动加载更多
 6.下拉刷新
 7.通用列表fragment
+8.将listview改为recyclerView
+
+api  基于retrofit+okhttp+rxjava的api通用库
+base 基本工具
+assemblyadapter 通用的adapter 带自动加载下一页
+pagefragment  适用于分页列表的fragment
