@@ -1,8 +1,5 @@
 package com.langchen.csdnread;
 
-import android.app.Application;
-import android.content.Context;
-
 import com.langchen.xlib.base.BaseApp;
 
 /**

@@ -10,7 +10,7 @@ import rx.Observable;
 /**
  * Created by admin on 2016/8/18.
  */
-public interface ArticleService {
+public interface ArticleService{
     @GET("/blog/getnewarticlelist?client_id=1100333")
     Observable<PageResp<Article>> getArticleList(@Query("page")int page);
 }

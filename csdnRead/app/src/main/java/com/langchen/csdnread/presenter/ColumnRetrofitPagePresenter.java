@@ -4,16 +4,16 @@ import com.langchen.csdnread.api.service.ColumnService;
 import com.langchen.csdnread.entity.Column;
 import com.langchen.xlib.api.resp.PageResp;
 import com.langchen.xlib.api.util.ApiUtils;
-import com.langchen.xlib.mvp.presenter.PagePresenter;
-import com.langchen.xlib.mvp.view.PageView;
+import com.langchen.xlib.ui.pagefragment.RetrofitPagePresenter;
+import com.langchen.xlib.ui.pagefragment.IPageView;
 
 import rx.Observable;
 
 /**
  * Created by admin on 2016/8/19.
  */
-public class ColumnPagePresenter extends PagePresenter<Column> {
-    public ColumnPagePresenter(PageView pageView) {
+public class ColumnRetrofitPagePresenter extends RetrofitPagePresenter<Column> {
+    public ColumnRetrofitPagePresenter(IPageView pageView) {
         super(pageView);
     }
 

@@ -1,10 +1,9 @@
-package com.langchen.csdnread.itemFactory;
+package com.langchen.xlib.ui.pagefragment;
 
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.langchen.csdnread.R;
-
+import com.langchen.xlib.R;
 import com.langchen.xlib.ui.assemblyadapter.AssemblyLoadMoreItemFactory;
 import com.langchen.xlib.ui.assemblyadapter.OnLoadMoreListener;
 

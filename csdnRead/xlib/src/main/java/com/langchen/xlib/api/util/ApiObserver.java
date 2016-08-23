@@ -6,10 +6,13 @@ import rx.Observer;
 
 /**
  * Created by admin on 2016/8/18.
+ * 用于处理服务器返回的错误信息
  */
 public abstract class ApiObserver<T> implements Observer<T> {
     @Override
-    public abstract void onCompleted();
+    public void onCompleted(){
+
+    }
 
     @Override
     public void onError(Throwable e) {

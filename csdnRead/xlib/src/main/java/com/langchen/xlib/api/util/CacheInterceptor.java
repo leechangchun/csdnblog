@@ -1,7 +1,5 @@
 package com.langchen.xlib.api.util;
 
-import android.util.Log;
-
 import com.langchen.xlib.base.AppUtil;
 import com.langchen.xlib.base.BaseApp;
 

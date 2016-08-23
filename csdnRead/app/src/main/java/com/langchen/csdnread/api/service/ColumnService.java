@@ -10,7 +10,7 @@ import rx.Observable;
 /**
  * Created by admin on 2016/8/18.
  */
-public interface ColumnService {
+public interface ColumnService{
     @GET("/blog/getcolumnlist?client_id=1100333")
     Observable<PageResp<Column>> getArticleList(@Query("page") int page);
 }

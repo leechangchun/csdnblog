@@ -12,6 +12,7 @@ import rx.functions.Func1;
 /**
  * Created by admin on 2016/8/18.
  * 对后台返回的数据进行预处理
+ * 主要是进行错误处理
  */
 public class ApiFunc1<T extends BaseResp> implements Func1<T, Observable<T>> {
     @Override
