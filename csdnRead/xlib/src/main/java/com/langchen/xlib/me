@@ -6,6 +6,7 @@
 6.下拉刷新
 7.通用列表fragment
 8.将listview改为recyclerView
+9.重构adapter框架
 
 api  基于retrofit+okhttp+rxjava的api通用库
 base 基本工具

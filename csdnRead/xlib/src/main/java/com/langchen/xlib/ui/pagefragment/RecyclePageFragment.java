@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +73,37 @@ public class RecyclePageFragment extends Fragment implements IPageView{
     /**
      * 3.设置布局管理器
      */
-    public void setLayoutManager(RecyclerView.LayoutManager layout){
-        recyclerView.setLayoutManager(layout);
+    public void setLayoutManager(final RecyclerView.LayoutManager lm){
+        //让foot占据整行
+        if (lm instanceof GridLayoutManager){
+            ((GridLayoutManager) lm).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    Object item = adapter.getItem(position);
+                    if (item == null) {//当item为加载更多时 getItem会返回null
+                        return ((GridLayoutManager) lm).getSpanCount();
+                    }
+                    return 1;
+                }
+            });
+        }
+
+        if ( lm instanceof StaggeredGridLayoutManager) {
+            //解决滑动过程中item交换位置的问题
+            final StaggeredGridLayoutManager lm1 = (StaggeredGridLayoutManager) lm;
+            lm1.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+
+            //防止第一行到顶部有空白区域
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    lm1.invalidateSpanAssignments();
+                }
+            });
+        }
+
+        recyclerView.setLayoutManager(lm);
     }
     /**
      * 3.初始化

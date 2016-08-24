@@ -1,6 +1,7 @@
 package com.langchen.xlib.ui.assemblyadapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.ViewGroup;
@@ -574,6 +575,12 @@ public class AssemblyRecyclerAdapter extends RecyclerView.Adapter {
     @Override
     @SuppressWarnings("unchecked")
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        //如果是foot并且  布局为瀑布流  则铺满
+        ViewGroup.LayoutParams layoutParams = viewHolder.itemView.getLayoutParams();
+        if(getItem(position)==null && layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
+            ((StaggeredGridLayoutManager.LayoutParams) layoutParams).setFullSpan(true);
+        }
+
         if (viewHolder instanceof AssemblyRecyclerItem) {
             ((AssemblyRecyclerItem) viewHolder).setData(position, getItem(position));
         }
