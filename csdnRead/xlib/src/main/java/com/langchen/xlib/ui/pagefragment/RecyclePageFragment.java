@@ -1,25 +1,16 @@
 package com.langchen.xlib.ui.pagefragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.langchen.xlib.R;
-import com.langchen.xlib.ui.assemblyadapter.AssemblyAdapter;
-import com.langchen.xlib.ui.assemblyadapter.AssemblyItemFactory;
-import com.langchen.xlib.ui.assemblyadapter.AssemblyLoadMoreRecyclerItemFactory;
 import com.langchen.xlib.ui.assemblyadapter.AssemblyRecyclerAdapter;
-import com.langchen.xlib.ui.assemblyadapter.AssemblyRecyclerItem;
-import com.langchen.xlib.ui.assemblyadapter.AssemblyRecyclerItemFactory;
-import com.langchen.xlib.ui.assemblyadapter.OnLoadMoreListener;
 import com.langchen.xlib.ui.assemblyadapter.OnRecyclerLoadMoreListener;
 
 import java.util.List;
@@ -33,6 +24,20 @@ import in.srain.cube.views.ptr.PtrHandler;
  * Created by admin on 2016/8/23.
  * 显示列表的fragment 用RecyclerView
  * 包含  分页 上拉加载  下拉刷新
+ *
+ * 该类不能直接使用  必须重新这些方法
+ public class ArticleFragment extends RecyclePageFragment {
+     public IPagePresenter getPagePresenter(){
+        return new ArticleRetrofitPagePresenter(this);
+     }
+     public RecyclerView.LayoutManager getLayoutManager(){
+        return new LinearLayoutManager(getActivity());
+     }
+     @Override
+     public void addItemFactory(AssemblyRecyclerAdapter adapter) {
+        adapter.addItemFactory(new ArticleItemFactory());
+     }
+ }
  */
 public class RecyclePageFragment extends Fragment implements IPageView{
     //数据加载器
@@ -50,24 +55,29 @@ public class RecyclePageFragment extends Fragment implements IPageView{
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         mPtrFrame = (PtrClassicFrameLayout) rootView.findViewById(R.id.rotate_header_list_view_frame);
         mPtrFrame.setLastUpdateTimeRelateObject(this);
+        pagePresenter = getPagePresenter();
+        if (pagePresenter==null) {
+            throw new RuntimeException("RecyclePageFragment不能直接使用");
+        }
+        List list = pagePresenter.getList();
+        adapter = new AssemblyRecyclerAdapter(list);
+        addItemFactory(adapter);
+        setLayoutManager(getLayoutManager());
+        init();
+        initData();
         return rootView;
     }
 
-    /**
-     * 以下三个方法必须按顺序调用
-     * 1.设置presenter
-     */
-    public void setPagePresenter(IPagePresenter pagePresenter) {
-        this.pagePresenter = pagePresenter;
-        List list = pagePresenter.getList();
-        adapter = new AssemblyRecyclerAdapter(list);
+    public IPagePresenter getPagePresenter(){
+        return null;
     }
 
-    /**
-     * 2.添加itemFactory
-     */
-    public void addItemFactory(AssemblyRecyclerItemFactory itemFactory){
-        adapter.addItemFactory(itemFactory);
+    public RecyclerView.LayoutManager getLayoutManager(){
+        return null;
+    }
+
+    public void addItemFactory(AssemblyRecyclerAdapter adapter) {
+
     }
 
     /**
@@ -130,12 +140,7 @@ public class RecyclePageFragment extends Fragment implements IPageView{
             }
         });
 
-        mPtrFrame.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mPtrFrame.autoRefresh();
-            }
-        }, 100);
+
     }
 
     @Override
@@ -156,5 +161,28 @@ public class RecyclePageFragment extends Fragment implements IPageView{
 
         //下拉结束
         mPtrFrame.refreshComplete();
+    }
+
+    protected boolean init = false;
+    /**
+     * 在这里实现Fragment数据的缓加载.
+     */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        initData();
+    }
+
+    /**初始化数据*/
+    public void initData(){
+        if(getUserVisibleHint() && mPtrFrame!=null && !init) {
+            mPtrFrame.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPtrFrame.autoRefresh();
+                }
+            }, 100);
+            init = true;
+        }
     }
 }
